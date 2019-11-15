@@ -37,6 +37,7 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
         let notificationCenter = UNUserNotificationCenter.current()
         
         notificationCenter.removeAllPendingNotificationRequests()
+        //↑ Always showing the newest notification at one time, but not deleting the notification history.
         
         let content = UNMutableNotificationContent()
         content.title = "Title goes here"
@@ -76,8 +77,40 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
             case UNNotificationDefaultActionIdentifier:
                 print("default identifier")
                 
+                let alert: UIAlertController = UIAlertController(title: "Default Title", message: "default message", preferredStyle: .alert)
+                
+                let defaultAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
+                    (action: UIAlertAction!) -> Void in
+                    print("OK")
+                })
+                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler:{
+                    (action: UIAlertAction!) -> Void in
+                    print("Cancel")
+                })
+                
+                alert.addAction(cancelAction)
+                alert.addAction(defaultAction)
+                
+                present(alert, animated: true, completion: nil)
+                
             case "show":
                 print("show more information...")
+                
+                let alert: UIAlertController = UIAlertController(title: "Custom Title", message: "custom message", preferredStyle: .alert)
+
+                let defaultAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
+                    (action: UIAlertAction!) -> Void in
+                    print("OK")
+                })
+                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler:{
+                    (action: UIAlertAction!) -> Void in
+                    print("Cancel")
+                })
+                
+                alert.addAction(cancelAction)
+                alert.addAction(defaultAction)
+                
+                present(alert, animated: true, completion: nil)
                 
             default:
                 break
